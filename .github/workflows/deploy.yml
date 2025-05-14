@@ -10,6 +10,21 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      - name: Set Up terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Terraform init
+        working-directory: ./terraform
+        run: terraform init
+
+      - name: Terraform Apply -  Allow SSH
+        working-directory: ./terraform
+        run: terraform apply -auto-approve
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: "us-east-1"
+
       - name: set up node.js
         uses: actions/setup-node@v3
         with:
@@ -40,3 +55,11 @@ jobs:
             docker pull ${{ secrets.DOCKER_USERNAME }}/demo-app:latest
             docker rm -f demo-app || true
             docker run -d -p 80:3000 --name demo-app ${{ secrets.DOCKER_USERNAME }}/demo-app:latest
+
+      - name: Terrafom Destroy -  Remove SSH Access
+        working-directory: ./terraform
+        run: terrafom destroy -auto-approve
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: "us-east-1"
