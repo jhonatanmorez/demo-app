@@ -1,4 +1,4 @@
-name: CI - docker build
+name: CI - Build, Test & Push Docker image
 on:
   push:
     branches:
@@ -22,9 +22,14 @@ jobs:
         run: npm install
 
       - name: run app test (optional)
-        run: echo "No test yet ..."
+        run: npm test
+
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Build docker image
-        run: docker build -t demo-app .
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/demo-app:latest .
 
+      - name: Push Docker image to Docker Hub
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/demo-app:latest
 
