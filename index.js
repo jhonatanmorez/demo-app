@@ -1,4 +1,2 @@
 // index.js
-
-console.log("Hello from Dockerized app!");
-
+console.log("Helo from Dockerized App!");
