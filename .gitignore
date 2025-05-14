@@ -7,6 +7,9 @@ node_modules
 terraform.tfstate
 terraform.tfstate.backup
 crash.log
+*.tfstate
+*.tfstate.backup
+*.tfplan
 
 # Planes generados por Terraform
 *.tfplan
