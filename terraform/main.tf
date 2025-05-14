@@ -3,8 +3,8 @@ provider "aws" {
 }
 
 module "ssh_sg_access" {
-  source	= "./sg-module"
-  security_group_id	= "sg-0b5d33e5e6e943ad4"
-  cidr_block		= "0.0.0.0/0"
+  source            = "./sg-module"
+  security_group_id = "sg-0b5d33e5e6e943ad4"
+  cidr_block        = "0.0.0.0/0"
 
 }
