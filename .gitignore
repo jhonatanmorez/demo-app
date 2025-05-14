@@ -1,2 +1,38 @@
 node_modules
 .env
+
+# Archivos de Terraform
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
+crash.log
+
+# Planes generados por Terraform
+*.tfplan
+
+# Archivos de override (no subas configuraciones locales)
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Archivos de variables sensibles
+*.tfvars
+*.tfvars.json
+secrets.auto.tfvars
+
+# Archivos de configuración local
+terraform.rc
+.terraformrc
+
+# Credenciales específicas de AWS (opcional, si usas perfil local)
+.aws/
+
+# Salidas de comandos
+*.log
+
+# Archivos de SSH (si los tienes en la carpeta de Terraform, aunque es recomendable no hacerlo)
+*.pem
+*.key
+
